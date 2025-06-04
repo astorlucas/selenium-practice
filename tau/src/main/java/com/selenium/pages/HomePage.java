@@ -19,4 +19,13 @@ public class HomePage {
         return new LoginPage(driver);
     }
 
+    private void clickLink(String linkText){
+        driver.findElement(By.linkText(linkText)).click();
+    }
+
+    public DropdownPage clickDropdownLink(){
+        clickLink("Dropdown");
+        return new DropdownPage(driver);
+    }
+
 }

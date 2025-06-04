@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.selenium.pages.HomePage;
@@ -15,7 +17,7 @@ public class BaseTests {
     private WebDriver driver;
     protected HomePage homePage;
 
-    @BeforeMethod
+    @BeforeClass
     protected void setUp(){
         //System.setProperty("webdriver.chrome.driver","resources/chrome.exe");
         driver = new ChromeDriver();
@@ -38,10 +40,9 @@ public class BaseTests {
         //driver.quit();
     }
 
-        public static void main(String[] args) {
-        BaseTests base = new BaseTests();
-
-        base.setUp();
+    @AfterClass
+    protected void tearDown(){
+        driver.quit();
     }
 
 }
