@@ -14,7 +14,7 @@ import com.selenium.pages.HomePage;
 
 public class BaseTests {
 
-    private WebDriver driver;
+    protected WebDriver driver;
     protected HomePage homePage;
 
     @BeforeClass
