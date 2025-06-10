@@ -38,4 +38,9 @@ public class HomePage {
         return new AlertsPage(driver);
     }
 
+    public KeyPressesPage clickKeyPressesLink(){
+        clickLink("Key Presses");
+        return new KeyPressesPage(driver);
+    }
+
 }
