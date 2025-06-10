@@ -33,4 +33,9 @@ public class HomePage {
         return new HoversPage(driver);
     }
 
+    public AlertsPage clickAlertsLink(){
+        clickLink("JavaScript Alerts");
+        return new AlertsPage(driver);
+    }
+
 }
