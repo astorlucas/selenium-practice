@@ -43,4 +43,9 @@ public class HomePage {
         return new KeyPressesPage(driver);
     }
 
+    public FileUploadPage clickFileUploadLink(){
+        clickLink("File Upload");
+        return new FileUploadPage(driver);
+    }
+
 }
