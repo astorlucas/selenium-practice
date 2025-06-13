@@ -21,6 +21,7 @@ public class BaseTests {
     protected void setUp(){
         //System.setProperty("webdriver.chrome.driver","resources/chrome.exe");
         driver = new ChromeDriver();
+        
         driver.get("https://the-internet.herokuapp.com/");
 
         homePage = new HomePage(driver);

@@ -51,6 +51,11 @@ public class HomePage {
     public WysiwygEditorPage clickWysiwygEditorLink(){
         clickLink("WYSIWYG Editor");
         return new WysiwygEditorPage(driver);
+    }   
+
+    public DynamicLoadingPage clickDynamicLoadingLink(){
+        clickLink("Dynamic Loading");
+        return new DynamicLoadingPage(driver);
     }
 
 }
