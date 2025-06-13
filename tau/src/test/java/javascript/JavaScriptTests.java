@@ -11,4 +11,9 @@ public class JavaScriptTests extends BaseTests {
         homePage.clickLargeAndDeepDomLink().scrollToTable();
     }
 
+    @Test
+    public void testScrollToBottom(){
+        homePage.clickInfiniteScrollLink().scrollToBottom(5);
+    }
+
 }

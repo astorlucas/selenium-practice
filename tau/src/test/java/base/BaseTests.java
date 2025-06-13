@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 import com.selenium.pages.HomePage;
+import com.selenium.utils.WindowManager;
 
 public class BaseTests {
 
@@ -21,7 +22,7 @@ public class BaseTests {
     protected void setUp(){
         //System.setProperty("webdriver.chrome.driver","resources/chrome.exe");
         driver = new ChromeDriver();
-        
+
         driver.get("https://the-internet.herokuapp.com/");
 
         homePage = new HomePage(driver);
@@ -44,6 +45,10 @@ public class BaseTests {
     @AfterClass
     protected void tearDown(){
         driver.quit();
+    }
+
+    public WindowManager getWindowManager(){
+        return new WindowManager(driver);
     }
 
 }
