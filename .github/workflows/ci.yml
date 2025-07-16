@@ -38,3 +38,9 @@ jobs:
 
     - name: Run tests
       run: mvn -B test --file tau/pom.xml 
+    - name: Upload Surefire Reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: surefire-reports
+        path: tau/target/surefire-reports/ 
