@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.support.events.EventFiringDecorator;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -26,36 +28,22 @@ public class BaseTests {
     protected HomePage homePage;
 
     @BeforeClass
-    protected void setUp(){
-        //System.setProperty("webdriver.chrome.driver","resources/chrome.exe");
+    public void setUp() {
         driver = new ChromeDriver();
-
         driver.get("https://the-internet.herokuapp.com/");
 
+        // driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
         homePage = new HomePage(driver);
-
-        // WebElement inputsLink = driver.findElement(By.linkText("Inputs"));
-        // inputsLink.click();
-
-        List<WebElement> links = driver.findElements(By.tagName("a"));
-
-
-        for (WebElement link : links) {
-            System.out.println(link.getText());
-        }
-
-
-        System.out.println(driver.getTitle());
-        //driver.quit();
     }
 
     @AfterClass
-    protected void tearDown(){
+    protected void tearDown() {
         driver.quit();
     }
 
     @AfterMethod
-    protected void takeScreenshot(ITestResult result){
+    protected void takeScreenshot(ITestResult result) {
         var camera = (TakesScreenshot) driver;
         File screenshot = camera.getScreenshotAs(OutputType.FILE);
         System.out.println("Screenshot taken");
@@ -75,13 +63,13 @@ public class BaseTests {
     }
 
     @AfterMethod
-    protected void recordFailure(ITestResult result){
-        if (ITestResult.FAILURE == result.getStatus()){
+    protected void recordFailure(ITestResult result) {
+        if (ITestResult.FAILURE == result.getStatus()) {
             takeScreenshot(result);
         }
     }
 
-    public WindowManager getWindowManager(){
+    public WindowManager getWindowManager() {
         return new WindowManager(driver);
     }
 
