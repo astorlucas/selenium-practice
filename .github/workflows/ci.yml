@@ -20,17 +20,19 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install Chrome
+    - name: Install Google Chrome
       run: |
+        wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
-    - name: Install ChromeDriver
+    - name: Install ChromeDriver (matching Chrome version)
       run: |
-        sudo apt-get install -yqq unzip
-        LATEST=$(curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-        wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${LATEST}/chromedriver_linux64.zip
-        sudo unzip /tmp/chromedriver.zip -d /usr/local/bin/
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\\d+\\.\\d+\\.\\d+')
+        CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" || curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE")
+        wget -O /tmp/chromedriver.zip "https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip"
+        sudo unzip -o /tmp/chromedriver.zip -d /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Build with Maven
